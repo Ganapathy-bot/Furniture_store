@@ -10,6 +10,27 @@ FurniStore is a full-stack app, so deploy the client and server separately.
 | Server | Render, Railway, Fly.io, or Docker host | `npm run build -w server`, then `npm run start -w server` |
 | Database | MongoDB Atlas | Use `MONGODB_URI` |
 
+This repo includes:
+
+- `vercel.json` for the React/Vite client.
+- `render.yaml` for the Express API on Render.
+
+## Connect From GitHub
+
+Render API Blueprint:
+
+```text
+https://dashboard.render.com/blueprints/new?repo=https://github.com/Ganapathy-bot/Furniture_store
+```
+
+Vercel frontend import:
+
+```text
+https://vercel.com/new/clone?repository-url=https://github.com/Ganapathy-bot/Furniture_store
+```
+
+Create the Render service first, then use its public URL for the Vercel `VITE_API_URL`.
+
 ## GitHub Setup
 
 1. Push the repository to GitHub.
@@ -19,7 +40,7 @@ FurniStore is a full-stack app, so deploy the client and server separately.
 
 ## Server Environment
 
-Set these variables on the server platform:
+The Render Blueprint prompts for secret values marked with `sync: false`. Set these values during the Blueprint creation flow:
 
 ```env
 NODE_ENV=production
@@ -45,9 +66,11 @@ ADMIN_PASSWORD=replace-with-a-strong-password
 ADMIN_NAME=Store Admin
 ```
 
+For Render, do not manually set `PORT` unless you need to override Render's default port.
+
 ## Client Environment
 
-Set this variable before building the client:
+Set this variable in Vercel before building the client:
 
 ```env
 VITE_API_URL=https://your-api-domain.example/api/v1
