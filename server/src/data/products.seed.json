@@ -1,0 +1,74 @@
+[
+  {
+    "name": "Ohrensessel Josslyn",
+    "slug": "ohrensessel-josslyn",
+    "price": 41999,
+    "currency": "INR",
+    "image": "/images/01.jpg",
+    "images": ["/images/01.jpg"],
+    "category": "Chairs",
+    "stock": 12,
+    "description": "A luxurious wingback armchair with premium upholstery and timeless design.",
+    "isActive": true
+  },
+  {
+    "name": "Sessel Sofie",
+    "slug": "sessel-sofie",
+    "price": 20999,
+    "currency": "INR",
+    "image": "/images/02.jpg",
+    "images": ["/images/02.jpg"],
+    "category": "Chairs",
+    "stock": 8,
+    "description": "Compact accent chair perfect for reading nooks and living spaces.",
+    "isActive": true
+  },
+  {
+    "name": "Sessel Anna",
+    "slug": "sessel-anna",
+    "price": 12499,
+    "currency": "INR",
+    "image": "/images/03.jpg",
+    "images": ["/images/03.jpg"],
+    "category": "Chairs",
+    "stock": 15,
+    "description": "Minimalist lounge chair with clean lines and comfortable cushioning.",
+    "isActive": true
+  },
+  {
+    "name": "Schlafsessel Rovigo",
+    "slug": "schlafsessel-rovigo",
+    "price": 19999,
+    "currency": "INR",
+    "image": "/images/04.jpg",
+    "images": ["/images/04.jpg"],
+    "category": "Sofas",
+    "stock": 6,
+    "description": "Versatile sleeper chair that transforms any room into a guest space.",
+    "isActive": true
+  },
+  {
+    "name": "Sessel Peacock",
+    "slug": "sessel-peacock",
+    "price": 49999,
+    "currency": "INR",
+    "image": "/images/05.jpg",
+    "images": ["/images/05.jpg"],
+    "category": "Chairs",
+    "stock": 4,
+    "description": "Statement designer chair inspired by mid-century modern aesthetics.",
+    "isActive": true
+  },
+  {
+    "name": "Sessel Little",
+    "slug": "sessel-little",
+    "price": 9999,
+    "currency": "INR",
+    "image": "/images/06.jpg",
+    "images": ["/images/06.jpg"],
+    "category": "Chairs",
+    "stock": 20,
+    "description": "Affordable everyday chair with durable fabric and solid wood legs.",
+    "isActive": true
+  }
+]

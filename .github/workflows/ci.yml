@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    services:
+      mongo:
+        image: mongo:7
+        ports:
+          - 27017:27017
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run security audit
+        run: npm run audit
+
+      - name: Run lint
+        run: npm run lint
+
+      - name: Build workspaces
+        run: npm run build
+
+      - name: Run server tests
+        run: npm run test -w server
+        env:
+          MONGODB_URI: mongodb://localhost:27017/furniture_shop-test
+          JWT_ACCESS_SECRET: test-access-secret-min-32-characters-long
+          JWT_REFRESH_SECRET: test-refresh-secret-min-32-characters-long

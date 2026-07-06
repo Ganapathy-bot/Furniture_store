@@ -1,27 +1,157 @@
-# react.js shopping cart
+# FurniStore
 
-example of shopping cart implemented in react.js and redux.js
+FurniStore is a full-stack furniture e-commerce MVP. It uses a React/Vite client, an Express/TypeScript API, MongoDB, Stripe checkout, JWT auth, and shared TypeScript types in an npm workspace monorepo.
 
-for demo [click here](http://krzysu.github.io/reactjs-shopping-cart/)
+## Stack
 
-## getting started
+| Layer | Technology |
+| --- | --- |
+| Frontend | React 18, Vite, Redux, TanStack Query, Tailwind CSS, React Router |
+| Backend | Node.js 20, Express, TypeScript, MongoDB, Mongoose |
+| Shared | TypeScript types and constants via `@furnistore/shared` |
+| DevOps | Docker Compose, GitHub Actions CI |
 
-install dependencies and start local dev server
+## Prerequisites
 
-```sh
+- Node.js 20+
+- npm 10+
+- Docker and Docker Compose for local MongoDB/Mailhog
+- MongoDB Atlas account for hosted database deployments
+- Stripe test account for checkout
+
+## Quick Start
+
+1. Install dependencies:
+
+```bash
 npm install
-npm start
 ```
 
-## details
-- build with [create react app](https://github.com/facebookincubator/create-react-app). Check their page for more details.
-- this example is using redux.js for application state management, to learn more about it I recommend [this tutorial](https://egghead.io/courses/getting-started-with-redux).
-- you can look under the hood directly from your browser using [redux devtools](https://github.com/zalmoxisus/redux-devtools-extension). Install extension for your browser, open demo page (link above) and see how app state changes when you interact with it.
-- if you wonder why reducers, actions and selectors are all in one file inside folder called `ducks`, [read more here](https://github.com/erikras/ducks-modular-redux).
+2. Create your local environment file:
 
-## TODO
-- add reducers and selectors unit tests
+```bash
+cp .env.example .env
+```
 
-* * *
-author: Kris Urbas [@krzysu](https://twitter.com/krzysu)   
-licence: MIT
+3. Start MongoDB and Mailhog:
+
+```bash
+docker compose up mongo mailhog -d
+```
+
+4. Initialize and seed the database:
+
+```bash
+npm run db:init
+```
+
+5. Start the client and server:
+
+```bash
+npm run dev
+```
+
+Local URLs:
+
+| Service | URL |
+| --- | --- |
+| Client | http://localhost:5173 |
+| API | http://localhost:5000 |
+| Health check | http://localhost:5000/api/v1/health |
+| Mailhog | http://localhost:8025 |
+
+Default seeded admin:
+
+| Field | Value |
+| --- | --- |
+| Email | `admin@furnistore.com` |
+| Password | `Admin@123456` |
+| Admin page | http://localhost:5173/admin |
+
+## Scripts
+
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start client and server concurrently |
+| `npm run dev:client` | Start only the Vite client |
+| `npm run dev:server` | Start only the Express API |
+| `npm run build` | Build shared, server, and client workspaces |
+| `npm run lint` | Run ESLint for client and server |
+| `npm run test` | Run server tests |
+| `npm run db:init` | Create collections, indexes, seed products, and admin user |
+| `npm run db:inspect` | Inspect MongoDB connection and collection counts |
+| `npm run docker:up` | Start the Docker Compose stack |
+| `npm run docker:down` | Stop the Docker Compose stack |
+
+## Environment
+
+Copy `.env.example` to `.env` for local development. Keep `.env` out of git.
+
+Required production values:
+
+| Variable | Purpose |
+| --- | --- |
+| `NODE_ENV=production` | Enables production checks |
+| `MONGODB_URI` | MongoDB connection string |
+| `JWT_ACCESS_SECRET` | Access-token signing secret |
+| `JWT_REFRESH_SECRET` | Refresh-token signing secret |
+| `CLIENT_URL` | Public client URL used for CORS and email links |
+| `VITE_API_URL` | Client API base URL at build time |
+| `STRIPE_SECRET_KEY` | Stripe secret key |
+| `STRIPE_WEBHOOK_SECRET` | Stripe webhook signing secret |
+
+See [docs/atlas-setup.md](docs/atlas-setup.md) and [docs/stripe-setup.md](docs/stripe-setup.md) for setup details.
+
+## Project Structure
+
+```text
+client/              React SPA (Vite)
+server/              Express API
+shared/              Shared TypeScript types and constants
+docker/              MongoDB init scripts
+docs/                Setup and architecture docs
+scripts/             Local setup helpers
+docker-compose.yml   Local development services
+```
+
+## GitHub Readiness
+
+This repo includes:
+
+- `.gitignore` for dependencies, build outputs, secrets, uploads, logs, and local deploy folders
+- `.env.example` with all required configuration keys
+- GitHub Actions CI for `npm ci`, audit, lint, build, and tests
+- `LICENSE` for the MIT license declared here
+- Deployment notes in [DEPLOYMENT.md](DEPLOYMENT.md)
+
+Before pushing:
+
+```bash
+npm run audit
+npm run lint
+npm run build
+npm run test
+```
+
+## Status
+
+Completed:
+
+- Monorepo workspace layout
+- Vite React client
+- Express API with TypeScript
+- MongoDB models and seed scripts
+- JWT auth, admin seed, protected routes
+- Checkout, Stripe sessions, orders, and webhook handling
+- CI, lint, tests, Docker local services
+
+Planned:
+
+- Product detail pages
+- Search and filters
+- Wishlist and reviews
+- Admin catalog/order management polish
+
+## License
+
+MIT. See [LICENSE](LICENSE).
